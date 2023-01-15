@@ -1,31 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./DAG.css";
 import { Graph } from "react-d3-graph";
+import { graphPaths } from "../../data/graph";
 
 const DAG = () => {
-  // graph payload (with minimalist structure)
-  const data = {
-    nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
-    links: [
-      { source: "Harry", target: "Sally" },
-      { source: "Harry", target: "Alice" },
-    ],
-  };
+  // const [graph, setGraph] = useState({});
+  // const [paths, setPaths] = useState([]);
+  const [data, setData] = useState({
+    nodes: [],
+    links: [],
+  });
 
+  // setPaths(graphPaths);
+  useEffect(() => {
+    const nodes = new Set();
+    const links = graphPaths
+      .map((path) => {
+        path.forEach((node) => nodes.add(node));
+        return path
+          .map((node, index, path) => ({
+            source: node,
+            target: path[index + 1],
+          }))
+          .slice(0, -1);
+      })
+      .flat();
+    setData({
+      nodes: [...nodes].map((node) => ({ id: node })),
+      links,
+    });
+  }, []);
+
+  console.log(data);
   // the graph configuration, just override the ones you need
   const myConfig = {
     directed: true,
+    direction: "BT",
     nodeHighlightBehavior: true,
     node: {
       color: "lightgreen",
       size: 800,
-      fontSize:10,
-      labelPosition:"center",
+      fontSize: 10,
+      labelPosition: "center",
       highlightStrokeColor: "blue",
     },
     link: {
-      strokeWidth:2.3,
+      strokeWidth: 2.3,
       highlightColor: "lightblue",
+    },
+    d3: {
+      gravity: -300,
     },
   };
 
