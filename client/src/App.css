@@ -1,6 +1,8 @@
 .App {
   height: 100vh;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap:1rem;
   display: flex;
 }

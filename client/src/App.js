@@ -1,9 +1,9 @@
 import "./App.css";
-import DAG from "./components/DAG/DAG";
+import Graph from "./pages/Graph";
 function App() {
   return (
     <div className="App">
-      <DAG />
+      <Graph />
     </div>
   );
 }

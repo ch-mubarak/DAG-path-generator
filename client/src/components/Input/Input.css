@@ -1,0 +1,23 @@
+.input {
+  width: 50%;
+  height: 20%;
+}
+.input > form {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.input > form > button {
+  border: none;
+  background: #144272;
+  padding: 0.6rem 1rem;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.3rem;
+  width: 20%;
+  border-radius: 1rem;
+  align-self: center;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
