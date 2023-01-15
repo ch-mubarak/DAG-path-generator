@@ -4,13 +4,36 @@ import { Graph } from "react-d3-graph";
 import { graphPaths } from "../../data/graph";
 
 const DAG = () => {
-  // const [graph, setGraph] = useState({});
   // const [paths, setPaths] = useState([]);
   const [data, setData] = useState({
     nodes: [],
     links: [],
   });
 
+  // const data = {
+  //   nodes: [
+  //     { id: 1 },
+  //     { id: 2 },
+  //     { id: 3 },
+  //     { id: 4 },
+  //     { id: 5 },
+  //     { id: 6 },
+  //     { id: 7 },
+  //     { id: 8 },
+  //   ],
+  //   links: [
+  //     { source: 1, target: 2 },
+  //     { source: 2, target: 6 },
+  //     { source: 1, target: 3 },
+  //     { source: 3, target: 6 },
+  //     { source: 3, target: 7 },
+  //     { source: 4, target: 7 },
+  //     { source: 1, target: 4 },
+  //     { source: 4, target: 8 },
+  //     { source: 1, target: 5 },
+  //     { source: 5, target: 8 },
+  //   ],
+  // };
   // setPaths(graphPaths);
   useEffect(() => {
     const nodes = new Set();
@@ -27,20 +50,16 @@ const DAG = () => {
       .flat();
     setData({
       nodes: [...nodes].map((node) => ({ id: node })),
-      links,
+      links: [...new Set(links)],
     });
   }, []);
-
-  console.log(data);
   // the graph configuration, just override the ones you need
   const myConfig = {
     directed: true,
-    direction: "BT",
     nodeHighlightBehavior: true,
     node: {
       color: "lightgreen",
       size: 800,
-      fontSize: 10,
       labelPosition: "center",
       highlightStrokeColor: "blue",
     },
@@ -48,26 +67,15 @@ const DAG = () => {
       strokeWidth: 2.3,
       highlightColor: "lightblue",
     },
-    d3: {
-      gravity: -300,
-    },
   };
 
-  const onClickNode = function (nodeId) {
-    window.alert(`Clicked node ${nodeId}`);
-  };
-
-  const onClickLink = function (source, target) {
-    window.alert(`Clicked link between ${source} and ${target}`);
-  };
+  console.log(data);
   return (
     <div className="graph">
       <Graph
         id="graph-id" // id is mandatory
         data={data}
         config={myConfig}
-        onClickNode={onClickNode}
-        onClickLink={onClickLink}
       />
     </div>
   );

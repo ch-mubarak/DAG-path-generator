@@ -1,8 +1,7 @@
 import express from "express";
+import { generatePaths } from "../controllers/graphController.js";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json("this is graph");
-});
+router.post("/create-path", generatePaths);
 
 export default router;
