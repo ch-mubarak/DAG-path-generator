@@ -8,11 +8,11 @@ import Input from "../components/Input/Input";
 const Graph = () => {
   const [graphPaths, setGraphPaths] = useState(null);
   const [pending, setPending] = useState(false);
-  const handleSubmit = async (graph) => {
+  const handleSubmit = async (start, graph) => {
     try {
       setPending(true);
       //calling path generation api
-      const { data } = await createPath(1, graph);
+      const { data } = await createPath(start, graph);
       setGraphPaths(data?.graphPaths);
     } catch (error) {
       console.log(error);

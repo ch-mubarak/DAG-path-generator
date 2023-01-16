@@ -5,6 +5,7 @@ import { UilPlusCircle } from "@iconscout/react-unicons";
 const Input = ({ handleSubmit }) => {
   const [graph, setGraph] = useState({ 1: [] });
   const [nodes, setNodes] = useState([1]);
+  const [startingNode, setStartingNode] = useState(1);
 
   const handleAddNode = () => {
     setNodes((preNodes) => [...preNodes, preNodes.length + 1]);
@@ -44,7 +45,12 @@ const Input = ({ handleSubmit }) => {
       </div>
       {nodes.map((node, index) => (
         <div key={index} className="nodes">
-          <span>{node}</span>
+          <div
+            onClick={() => setStartingNode(node)}
+            className={startingNode === node ? "primary-node" : ""}
+          >
+            {node}
+          </div>
           {index === 0 ? (
             <input
               placeholder="2,3,5"
@@ -63,7 +69,7 @@ const Input = ({ handleSubmit }) => {
           )}
         </div>
       ))}
-      <button onClick={() => handleSubmit(graph)}>Submit</button>
+      <button onClick={() => handleSubmit(startingNode, graph)}>Submit</button>
     </div>
   );
 };
