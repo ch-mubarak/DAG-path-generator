@@ -1,12 +1,11 @@
 export const generatePaths = (req, res, next) => {
   try {
     const paths = [];
-    const { graph } = req.body;
+    const { graph,start=1 } = req.body;
     if (!graph) {
       res.status(401);
-      throw new Error("No data provided");
+      throw new Error("Please provide starting node and graph data");
     }
-    const start = 1;
     function createPaths(graph, start, path = []) {
       path.push(start);
       if (!graph[start]) {

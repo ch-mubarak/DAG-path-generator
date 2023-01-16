@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./DAG.css";
 import { Graph } from "react-d3-graph";
-import { graphPaths } from "../../data/graph";
-import * as d3 from "d3";
-import axios from "axios";
-
-const DAG = () => {
-  // const [paths, setPaths] = useState([]);
+const DAG = ({graphPaths}) => {
   const [data, setData] = useState({
     nodes: [],
     links: [],
   });
 
-  // setPaths(graphPaths);
   useEffect(() => {
     const nodes = new Set();
     const links = graphPaths
@@ -30,8 +24,9 @@ const DAG = () => {
       nodes: [...nodes].map((node) => ({ id: node })),
       links,
     });
-  }, []);
-  // the graph configuration, just override the ones you need
+  }, [graphPaths]);
+
+  // the graph configuration
   const myConfig = {
     directed: true,
     nodeHighlightBehavior: true,

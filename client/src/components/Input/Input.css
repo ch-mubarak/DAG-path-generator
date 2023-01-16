@@ -1,21 +1,30 @@
 .input {
-  width: 50%;
-  height: 20%;
-}
-.input > form {
   display: flex;
   gap: 0.5rem;
+  width: 70%;
+  height: 60%;
   flex-direction: column;
 }
 
-.input > form > button {
+.input > div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.input > div > button {
+  padding: 0.2rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+}
+
+.input button {
   border: none;
   background: #144272;
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: 600;
   font-size: 1.3rem;
-  width: 20%;
   border-radius: 1rem;
   align-self: center;
   cursor: pointer;
