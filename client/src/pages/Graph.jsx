@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { createPath } from "../api/graph";
 import DAG from "../components/DAG/DAG";
+import { ErrorBoundary } from "../components/ErrorBoundry/ErrorBoundry";
 import Input from "../components/Input/Input";
 
 const Graph = () => {
-  const [graphPaths, setGraphPaths] = useState("");
+  const [graphPaths, setGraphPaths] = useState(null);
   const [pending, setPending] = useState(false);
   const handleSubmit = async (graph) => {
-    if (graph.trim().length === 0) return;
     try {
       setPending(true);
       //calling path generation api
@@ -15,12 +15,17 @@ const Graph = () => {
       setGraphPaths(data);
     } catch (error) {
       console.log(error);
+      setGraphPaths(null);
     }
     setPending(false);
   };
   return (
     <>
-      {/* {graphPaths && <DAG graphPaths={graphPaths} />} */}
+      {graphPaths && (
+        <ErrorBoundary>
+          <DAG graphPaths={graphPaths} />
+        </ErrorBoundary>
+      )}
       {pending && <h2>Loading....</h2>}
       <Input handleSubmit={handleSubmit} />
     </>
