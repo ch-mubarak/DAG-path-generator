@@ -22,11 +22,9 @@ const Graph = () => {
   };
   return (
     <div className="graph">
-      {graphPaths && (
-        <ErrorBoundary>
-          <DAG graphPaths={graphPaths} />
-        </ErrorBoundary>
-      )}
+      <ErrorBoundary>
+        <DAG graphPaths={graphPaths} />
+      </ErrorBoundary>
       {pending && <h2>Loading....</h2>}
       <Input handleSubmit={handleSubmit} />
     </div>

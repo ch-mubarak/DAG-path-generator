@@ -23,10 +23,9 @@ const DAG = ({ graphPaths }) => {
 
     //removing duplicate list
     const uniqueLinks = [
-      ...new Set(links.map((link) => JSON.stringify(link))),
+      ...new Set(links?.map((link) => JSON.stringify(link))),
     ].map((link) => JSON.parse(link));
 
-    console.log(uniqueLinks);
     setData({
       nodes: [...nodes].map((node) => ({ id: node })),
       links: uniqueLinks,
@@ -55,11 +54,13 @@ const DAG = ({ graphPaths }) => {
 
   return (
     <div className="dag">
-      <Graph
-        id="graph-id" // id is mandatory
-        data={data}
-        config={myConfig}
-      />
+      {data && (
+        <Graph
+          id="graph-id" // id is mandatory
+          data={data}
+          config={myConfig}
+        />
+      )}
     </div>
   );
 };
