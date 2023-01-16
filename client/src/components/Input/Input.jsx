@@ -5,6 +5,7 @@ import { UilPlusCircle } from "@iconscout/react-unicons";
 const Input = ({ handleSubmit }) => {
   const [graph, setGraph] = useState({ 1: [] });
   const [nodes, setNodes] = useState([1]);
+  const [errorInput, setErrorInput] = useState({});
   const [startingNode, setStartingNode] = useState(1);
 
   const handleAddNode = () => {
@@ -29,14 +30,29 @@ const Input = ({ handleSubmit }) => {
 
   const handleChangeNode = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = e.target.value?.split(",");
+    setErrorInput((prevInputs) => {
+      return {
+        ...prevInputs,
+        [name]: false,
+      };
+    });
+    if (value.includes(name)) {
+      setErrorInput((prevInputs) => {
+        return {
+          ...prevInputs,
+          [name]: true,
+        };
+      });
+    }
     setGraph((prevGraph) => {
       return {
         ...prevGraph,
-        [name]: value?.split(","),
+        [name]: value,
       };
     });
   };
+
   return (
     <div className="input">
       <div className="add-node">
@@ -53,7 +69,8 @@ const Input = ({ handleSubmit }) => {
           </div>
           {index === 0 ? (
             <input
-              placeholder="2,3,5"
+              className={errorInput[node] === true ? "input-warning" : ""}
+              placeholder="2,3,5..."
               defaultValue={[]}
               value={graph.node?.split(",")}
               name={node}
@@ -61,6 +78,7 @@ const Input = ({ handleSubmit }) => {
             />
           ) : (
             <input
+              className={errorInput[node] === true ? "input-warning" : ""}
               value={graph.node?.split(",")}
               defaultValue={[]}
               name={node}

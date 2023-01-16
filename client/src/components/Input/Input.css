@@ -64,3 +64,8 @@
 .primary-node {
   border: 3px solid #144272;
 }
+
+.input-warning {
+  border: none;
+  outline: red 2px solid;
+}
