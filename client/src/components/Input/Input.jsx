@@ -26,8 +26,6 @@ const Input = ({ handleSubmit }) => {
     });
   };
 
-  console.log(graph);
-
   const handleChangeNode = (e) => {
     const name = e.target.name;
     const value = e.target.value;

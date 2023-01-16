@@ -17,6 +17,7 @@ export const generatePaths = (req, res, next) => {
       }
     }
     createPaths(graph, start);
+    console.log(paths)
     res.status(201).json({ graphPaths: paths });
   } catch (error) {
     next(error);

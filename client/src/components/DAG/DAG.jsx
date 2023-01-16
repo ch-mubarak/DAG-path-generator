@@ -9,7 +9,6 @@ const DAG = ({ graphPaths }) => {
 
   useEffect(() => {
     const nodes = new Set();
-    console.log(graphPaths)
     const links = graphPaths
       ?.map((path) => {
         path.forEach((node) => nodes.add(node));
@@ -21,9 +20,16 @@ const DAG = ({ graphPaths }) => {
           .slice(0, -1);
       })
       .flat();
+
+    //removing duplicate list
+    const uniqueLinks = [
+      ...new Set(links.map((link) => JSON.stringify(link))),
+    ].map((link) => JSON.parse(link));
+
+    console.log(uniqueLinks);
     setData({
       nodes: [...nodes].map((node) => ({ id: node })),
-      links,
+      links: uniqueLinks,
     });
   }, [graphPaths]);
 
