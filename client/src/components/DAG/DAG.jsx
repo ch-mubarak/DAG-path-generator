@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./DAG.css";
 import { Graph } from "react-d3-graph";
-const DAG = ({graphPaths}) => {
+const DAG = ({ graphPaths }) => {
   const [data, setData] = useState({
     nodes: [],
     links: [],
@@ -9,8 +9,9 @@ const DAG = ({graphPaths}) => {
 
   useEffect(() => {
     const nodes = new Set();
+    console.log(graphPaths)
     const links = graphPaths
-      .map((path) => {
+      ?.map((path) => {
         path.forEach((node) => nodes.add(node));
         return path
           .map((node, index, path) => ({
@@ -38,7 +39,7 @@ const DAG = ({graphPaths}) => {
     },
     link: {
       strokeWidth: 2.3,
-      color:"#144272",
+      color: "#144272",
       highlightColor: "#EAFDFC",
     },
     d3: {
@@ -46,9 +47,8 @@ const DAG = ({graphPaths}) => {
     },
   };
 
-  console.log(data);
   return (
-    <div className="graph">
+    <div className="dag">
       <Graph
         id="graph-id" // id is mandatory
         data={data}

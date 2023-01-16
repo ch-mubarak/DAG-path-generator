@@ -3,17 +3,30 @@ import "./Input.css";
 import { UilTrashAlt } from "@iconscout/react-unicons";
 import { UilPlusCircle } from "@iconscout/react-unicons";
 const Input = ({ handleSubmit }) => {
-  const [graph, setGraph] = useState({});
+  const [graph, setGraph] = useState({ 1: [] });
   const [nodes, setNodes] = useState([1]);
 
   const handleAddNode = () => {
     setNodes((preNodes) => [...preNodes, preNodes.length + 1]);
+    setGraph((prevGraph) => {
+      return {
+        ...prevGraph,
+        [nodes.length + 1]: [],
+      };
+    });
   };
-  //   console.log(nodes);
+
   const handleRemoveNode = () => {
     if (nodes.length === 1) return;
     setNodes((preNodes) => preNodes.slice(0, -1));
+    setGraph((prevGraph) => {
+      const newGraph = { ...prevGraph };
+      delete newGraph[nodes.length];
+      return newGraph;
+    });
   };
+
+  console.log(graph);
 
   const handleChangeNode = (e) => {
     const name = e.target.name;
@@ -34,11 +47,22 @@ const Input = ({ handleSubmit }) => {
       {nodes.map((node, index) => (
         <div key={index} className="nodes">
           <span>{node}</span>
-          <input
-            value={graph.node?.split(",")}
-            name={node}
-            onChange={handleChangeNode}
-          />
+          {index === 0 ? (
+            <input
+              placeholder="2,3,5"
+              defaultValue={[]}
+              value={graph.node?.split(",")}
+              name={node}
+              onChange={handleChangeNode}
+            />
+          ) : (
+            <input
+              value={graph.node?.split(",")}
+              defaultValue={[]}
+              name={node}
+              onChange={handleChangeNode}
+            />
+          )}
         </div>
       ))}
       <button onClick={() => handleSubmit(graph)}>Submit</button>

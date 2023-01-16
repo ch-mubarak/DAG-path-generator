@@ -27,20 +27,29 @@
   align-items: center;
 }
 
-.input button {
+.input > button {
   border: none;
   background: #144272;
   padding: 0.6rem 0.8rem;
   color: #fff;
   font-weight: 600;
   font-size: 1.2rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   align-self: center;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.nodes {
+  display: flex;
+  align-items: center;
+}
+
+.nodes > input {
+  font-size: 1.1rem;
+}
+
 .nodes > span {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
 }

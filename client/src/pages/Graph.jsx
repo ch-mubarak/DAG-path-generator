@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createPath } from "../api/graph";
 import DAG from "../components/DAG/DAG";
+import "./Graph.css";
 import { ErrorBoundary } from "../components/ErrorBoundry/ErrorBoundry";
 import Input from "../components/Input/Input";
 
@@ -12,7 +13,7 @@ const Graph = () => {
       setPending(true);
       //calling path generation api
       const { data } = await createPath(1, graph);
-      setGraphPaths(data);
+      setGraphPaths(data?.graphPaths);
     } catch (error) {
       console.log(error);
       setGraphPaths(null);
@@ -20,7 +21,7 @@ const Graph = () => {
     setPending(false);
   };
   return (
-    <>
+    <div className="graph">
       {graphPaths && (
         <ErrorBoundary>
           <DAG graphPaths={graphPaths} />
@@ -28,7 +29,7 @@ const Graph = () => {
       )}
       {pending && <h2>Loading....</h2>}
       <Input handleSubmit={handleSubmit} />
-    </>
+    </div>
   );
 };
 
