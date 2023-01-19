@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./DAG.css";
 import { Graph } from "react-d3-graph";
-const DAG = ({ graphPaths }) => {
+const DAG = ({ graphPaths, error, pending }) => {
   const [data, setData] = useState({
     nodes: [],
     links: [],
   });
 
   useEffect(() => {
+    console.log(graphPaths);
     const nodes = new Set();
     const links = graphPaths
       ?.map((path) => {
@@ -54,6 +55,8 @@ const DAG = ({ graphPaths }) => {
 
   return (
     <div className="dag">
+      {error && <h2 className="error">{error}</h2>}
+      {pending && <h2>Loading....</h2>}
       {data && (
         <Graph
           id="graph-id" // id is mandatory

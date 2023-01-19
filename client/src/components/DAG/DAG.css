@@ -1,6 +1,14 @@
 .dag {
   border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   border-radius: 1rem;
-  background-color: #D7E9B9;
+  background-color: #d7e9b9;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.error{
+  color: red;
 }
